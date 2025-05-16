@@ -14,4 +14,14 @@
         font-size: 16px;
         margin: 0;
     }
+
+    &__delete {
+        background-color: #ff9999;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 5px;
+        width: fit-content;
+        cursor: pointer;
+        align-self: flex-end;
+    }
 }
