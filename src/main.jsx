@@ -4,6 +4,14 @@ import { TermList } from './TermList';
 
 let terms = [];
 
+const descriptionList = document.getElementById('description-list');
+
+const reactRoot = createRoot(descriptionList);
+
+function syncTermList() {
+    reactRoot.render(<TermList terms={terms} onDelete={ deleteItem } />);
+}
+
 function addTerm(title, description) {
     terms.push({
         id: crypto.randomUUID(),
@@ -11,13 +19,16 @@ function addTerm(title, description) {
         description
     });
     terms.sort((term1, term2) => term1.title < term2.title ? -1 : 1);
-    reactRoot.render(<TermList terms={terms} />);
+    syncTermList();
 }
 
-const descriptionList = document.getElementById('description-list');
+function deleteItem(id) {
+    terms = terms.filter(term => term.id !== id);
 
-const reactRoot = createRoot(descriptionList);
-reactRoot.render(<TermList terms={terms} />);
+    syncTermList();
+}
+
+syncTermList();
 
 const form = document.getElementById('add-description');
 
